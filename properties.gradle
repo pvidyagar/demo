@@ -1,0 +1,23 @@
+def getJvmArgs(){
+
+    def applicationDefaultJvmArgs = []
+    def activeProfile =  "${project.gradle.startParameter.systemPropertiesArgs['spring.profiles.active']}"
+
+    if(activeProfile != "null"){
+        applicationDefaultJvmArgs.push("-Dspring.profiles.active=${activeProfile}");
+    }
+    return applicationDefaultJvmArgs;
+}
+
+project.ext {
+
+    libsRepo ="https://plugins.gradle.org/m2/"
+    springBootVersion = '1.4.1.RELEASE'
+
+    applicationDefaultJvmArgs = getJvmArgs()
+}
+
+//Lets command-line -P properties override the above
+gradle.startParameter.getProjectProperties().each { property, value ->
+    project.ext[property] = value
+}

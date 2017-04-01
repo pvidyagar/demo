@@ -1,0 +1,4 @@
+include(
+    "demo-service-ui"
+)
+rootProject.name='demo-service'

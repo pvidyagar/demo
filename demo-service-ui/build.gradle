@@ -1,0 +1,49 @@
+apply plugin: 'com.moowork.node'
+apply plugin: 'java'
+
+group 'com.example.demo'
+
+buildscript {
+	repositories {
+		mavenCentral()
+		maven {url "https://plugins.gradle.org/m2/"}
+	}
+	dependencies {
+		classpath "com.moowork.gradle:gradle-node-plugin:1.1.1"
+	}
+}
+
+task buildProd(type: NpmTask) {
+  args = ['run', 'prod']
+}
+
+task buildDev(type: NpmTask) {
+  args = ['run', 'dev']
+}
+
+task copyProd(type: Copy, dependsOn: ['clean', 'npmInstall', 'buildProd']) {
+  from "${projectDir}/dist"
+  into "${rootDir}/src/main/resources/public"
+}
+
+task copyDev(type: Copy, dependsOn: ['clean', 'npmInstall', 'buildDev']) {
+  from "${projectDir}/dist"
+  into "${rootDir}/src/main/resources/public"
+}
+
+buildProd.mustRunAfter npmInstall
+buildDev.mustRunAfter npmInstall
+npmInstall.mustRunAfter clean
+
+npm_test.dependsOn(npmInstall);
+
+task protractor(type: NpmTask) {
+  args = ['run', 'e2e']
+}
+
+clean.doFirst {
+  delete "${rootDir}/src/main/resources/public"
+  delete "${rootDir}/rpt-ui/dist"
+}
+
+

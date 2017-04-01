@@ -1,0 +1,51 @@
+defaultTasks = ['clean', 'build']
+
+buildscript {
+	apply from: 'properties.gradle'
+	repositories {
+		maven { url libsRepo }
+		ivy {
+			layout 'maven'
+			url libsRepo
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "com.moowork.gradle:gradle-node-plugin:0.13"
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'demo-service'
+	version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	maven { url libsRepo }
+}
+
+dependencies {
+	compile('org.projectlombok:lombok')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('com.jayway.jsonpath:json-path-assert:2.2.0')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.RELEASE"
+	}
+}
+
+
+processResources.dependsOn ':demo-service-ui:copyProd'
+
+bootRun.dependsOn ':demo-service-ui:copyDev'

@@ -1,0 +1,28 @@
+
+<div class="container">
+<h2>Service 1 connected!</h2>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="page-header">
+				<h1 id="typography">Blockquotes</h1>
+			</div>
+		</div>
+	</div>
+    <button  class="btn btn-primary" (click)="getQuotes()">Get Quotes</button>
+	
+	<!-- Blockquotes -->
+
+	<div class="row" *ngIf="enable">
+		<div class="col-lg-6">
+			<div class="bs-component">
+				<blockquote  *ngFor="let quote of quotes">
+					<p>{{quote.title}}</p>
+					<small>{{quote.from}} <cite title="Source Title">{{quote.name}}</cite></small>
+				</blockquote>
+				<div id="source-button" class="btn btn-primary btn-xs"
+					style="display: none;">&lt; &gt;</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
