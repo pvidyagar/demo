@@ -1,6 +1,5 @@
 import { Component, OnInit,Input } from '@angular/core';
 import {Observable} from 'rxjs';
-import {select} from 'ng2-redux';
 
 @Component({
   selector: 'app-main-header',
