@@ -48,4 +48,4 @@ dependencyManagement {
 
 processResources.dependsOn ':demo-service-ui:copyProd'
 
-bootRun.dependsOn ':demo-service-ui:copyDev'
+//bootRun.dependsOn ':demo-service-ui:copyDev'

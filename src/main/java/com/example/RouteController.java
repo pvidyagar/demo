@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RouteController {
 
-    @RequestMapping({"/*"})
     public String index() {
         return "forward:/index.html";
     }

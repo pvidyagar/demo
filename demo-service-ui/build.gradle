@@ -23,12 +23,12 @@ task buildDev(type: NpmTask) {
 
 task copyProd(type: Copy, dependsOn: ['clean', 'npmInstall', 'buildProd']) {
   from "${projectDir}/dist"
-  into "${rootDir}/src/main/resources/public"
+  into "../src/main/resources/public"
 }
 
 task copyDev(type: Copy, dependsOn: ['clean', 'npmInstall', 'buildDev']) {
   from "${projectDir}/dist"
-  into "${rootDir}/src/main/resources/public"
+  into "../src/main/resources/public"
 }
 
 buildProd.mustRunAfter npmInstall
@@ -42,8 +42,8 @@ task protractor(type: NpmTask) {
 }
 
 clean.doFirst {
-  delete "${rootDir}/src/main/resources/public"
-  delete "${rootDir}/rpt-ui/dist"
+  delete "../src/main/resources/public"
+  delete "../demo-service-ui/dist"
 }
 
 

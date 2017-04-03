@@ -11,7 +11,7 @@ import {Service2Component} from './service2/service2.component';
     RouterModule.forRoot([
       {
         path: '',
-        component: LandingComponent
+        component: Service1Component
       },
       {
         path: 'about',

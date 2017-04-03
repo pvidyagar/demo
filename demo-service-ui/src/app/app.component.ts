@@ -7,7 +7,7 @@ import {Component,OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-   private appTitle:string = 'My Dream APP  !!!';
+   private appTitle:string = 'My Dream APP -updated  !!!';
     
     constructor() {
 
